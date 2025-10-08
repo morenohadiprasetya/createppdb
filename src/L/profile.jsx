@@ -1,6 +1,6 @@
 import React from "react";
  import { Profiler } from "react";
-import andre from "../assets/image/K.jpg"
+import andre from "../assets/image/Test.jpg"
 import Sidnav from "./sidnav";
 
 function Profil() {

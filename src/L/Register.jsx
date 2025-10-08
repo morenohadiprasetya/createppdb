@@ -78,7 +78,7 @@ function Register() {
       text: "Akun kamu berhasil dibuat.",
       confirmButtonText: "Lanjut",
     }).then(() => {
-      navigate("/sidnav"); 
+      navigate("/login"); 
     });
 
      
