@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom"; 
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 function Register() {
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     name: "",
@@ -10,6 +11,7 @@ function Register() {
     password: "",
     confirm: "",
   });
+
   const [errors, setErrors] = useState({});
   const [message, setMessage] = useState("");
 
@@ -40,7 +42,7 @@ function Register() {
 
     if (name.trim().length < 2) newErrors.name = "Nama minimal 2 karakter.";
     if (!isValidEmail(email)) newErrors.email = "Masukkan email yang valid.";
-    if (password.length < 6)
+    if (password.length < 1)
       newErrors.password = "Password minimal 6 karakter.";
     if (password !== confirm) newErrors.confirm = "Password tidak cocok.";
 
@@ -69,7 +71,17 @@ function Register() {
     users.push(newUser);
     localStorage.setItem(usersKey, JSON.stringify(users));
 
-    setMessage("Berhasil daftar! Data tersimpan di localStorage.");
+     
+    Swal.fire({
+      icon: "success",
+      title: "Berhasil daftar!",
+      text: "Akun kamu berhasil dibuat.",
+      confirmButtonText: "Lanjut",
+    }).then(() => {
+      navigate("/sidnav"); 
+    });
+
+     
     setFormData({ name: "", email: "", password: "", confirm: "" });
   };
 
@@ -127,10 +139,9 @@ function Register() {
             Daftar
           </button>
 
-          
           <button
-            type="button" 
-            onClick={() => navigate("/L")}
+            type="button"
+            onClick={() => navigate("/login")}
             style={{ ...styles.button, background: "red", marginTop: 10 }}
           >
             Kembali
